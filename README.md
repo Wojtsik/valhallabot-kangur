@@ -1,2 +1,2 @@
 # valhallabot-kangur
-testowy push
+Tutaj coś w przyszłości będzie pogchamp
