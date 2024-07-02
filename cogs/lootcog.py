@@ -20,10 +20,13 @@ class lupy(commands.Cog):
         todos = json.loads(json_download.text)
         rank = todos['content']['FR']   
         gracz1 = todos['content']['SV']
-        for i in range(0,10):
-            if rank==todos['content']['L'][i][0]:
-                lupy = todos['content']['L'][i][1]
-                formattedlupy = f"{lupy:,d}".replace(',', ' ')
-        await ctx.respond(f'Gracz {gracz1} w tym tygodniu pozyskał {formattedlupy} puntków rabunku')
+        if todos['return_code']=="0":
+            for i in range(0,10):
+                if rank==todos['content']['L'][i][0]:
+                    lupy = todos['content']['L'][i][1]
+                    formattedlupy = f"{lupy:,d}".replace(',', ' ')
+            await ctx.respond(f'Gracz {gracz1} w tym tygodniu pozyskał {formattedlupy} puntków rabunku')
+        else:
+            await ctx.respond('ERROR')
 def setup(bot):
     bot.add_cog(lupy(bot))
