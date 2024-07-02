@@ -24,6 +24,6 @@ class lupy(commands.Cog):
             if rank==todos['content']['L'][i][0]:
                 lupy = todos['content']['L'][i][1]
                 formattedlupy = f"{lupy:,d}".replace(',', ' ')
-        await ctx.respond(f'Gracz {gracz1} w tym tygodniu pozyskał {formattedlupy} puntków rabunku')
+        await ctx.respond(f'Gracz {gracz1} w tym tygodniu pozyskał {formattedlupy} punktów rabunku')
 def setup(bot):
     bot.add_cog(lupy(bot))
