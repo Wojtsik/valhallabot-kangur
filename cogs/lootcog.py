@@ -21,12 +21,16 @@ class lupy(commands.Cog):
             await ctx.respond("Dostępne opcje to pl (Polska 1) lub cn (Chiński)")
         json_download = requests.get(link)
         todos = json.loads(json_download.text)
-        rank = todos['content']['FR']   
-        gracz1 = todos['content']['SV']
-        for i in range(0,10):
-            if rank==todos['content']['L'][i][0]:
-                lupy = todos['content']['L'][i][1]
-                formattedlupy = f"{lupy:,d}".replace(',', ' ')
-        await ctx.respond(f'Gracz **{gracz1}** w tym tygodniu pozyskał **{formattedlupy}** punktów rabunku', ephemeral=False)
+        # Checking if player is in DB.
+        if todos['return_code']=="0":
+            rank = todos['content']['FR']   
+            gracz1 = todos['content']['SV']
+            for i in range(0,10):
+                if rank==todos['content']['L'][i][0]:
+                    lupy = todos['content']['L'][i][1]
+                    formattedlupy = f"{lupy:,d}".replace(',', ' ')
+            await ctx.respond(f'Gracz **{gracz1}** w tym tygodniu pozyskał **{formattedlupy}** punktów rabunku', ephemeral=False)
+        else:
+            await ctx.respond("Nie znaleziono w bazie :<")
 def setup(bot):
     bot.add_cog(lupy(bot))
